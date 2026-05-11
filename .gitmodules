@@ -1,0 +1,3 @@
+[submodule "gitsubmodul"]
+	path = gitsubmodul
+	url = https://github.com/GetStream/stream-chat-flutter

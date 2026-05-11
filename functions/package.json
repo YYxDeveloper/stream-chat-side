@@ -5,7 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "build": "tsc",
-    "serve": "npm run build && firebase emulators:start --only functions",
+    "serve": "node -r dotenv/config build/index.js && firebase emulators:start --only functions",
     "deploy": "firebase deploy --only functions",
     "test": "jest"
   },
@@ -13,6 +13,7 @@
     "node": "18"
   },
   "dependencies": {
+    "dotenv": "^16.0.0",
     "firebase-admin": "^12.0.0",
     "firebase-functions": "^4.5.0",
     "stream-chat": "^8.0.0"

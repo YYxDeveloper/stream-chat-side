@@ -1,10 +1,14 @@
 import * as functions from "firebase-functions";
 import { StreamChat } from "stream-chat";
 
-const serverClient = StreamChat.getInstance(
-  functions.config().stream.key,
-  functions.config().stream.secret
-);
+const STREAM_API_KEY = process.env.STREAM_API_KEY || functions.config().stream?.key;
+const STREAM_API_SECRET = process.env.STREAM_API_SECRET || functions.config().stream?.secret;
+
+if (!STREAM_API_KEY || !STREAM_API_SECRET) {
+  throw new Error("Missing STREAM_API_KEY or STREAM_API_SECRET");
+}
+
+const serverClient = StreamChat.getInstance(STREAM_API_KEY, STREAM_API_SECRET);
 
 export const createStreamUserAndGetToken = functions.https.onCall(
   async (data, context) => {

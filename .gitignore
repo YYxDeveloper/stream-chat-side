@@ -47,3 +47,10 @@ app.*.map.json
 
 # Firebase Android config (contains API keys)
 android/app/google-services.json
+
+# Playwright
+**/node_modules/
+**/playwright-report/
+**/test-results/
+**/.playwright/
+**/playwright/.cache/

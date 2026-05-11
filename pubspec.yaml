@@ -40,7 +40,7 @@ dependencies:
   firebase_auth: ^5.5.3
   cloud_functions: ^5.1.4
   google_sign_in: ^6.2.2
-  sign_in_with_apple: ^5.0.0
+  sign_in_with_apple: ^7.0.0
 
   # Stream Chat
   stream_chat: ^9.23.0

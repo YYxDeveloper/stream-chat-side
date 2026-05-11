@@ -19,9 +19,11 @@ export const createStreamUserAndGetToken = functions.https.onCall(
       );
     }
     const { uid } = context.auth;
-    const { name, email, image } = data;
+    const name: string = data?.name ?? "";
+    const email: string = data?.email ?? "";
+    const image: string = data?.image ?? "";
     try {
-      await serverClient.upsertUser({ id: uid, name, email, image });
+      await serverClient.upsertUser({ id: uid, name, email, image: image || undefined });
       const token = serverClient.createToken(uid);
       return { token };
     } catch (e) {
@@ -62,6 +64,10 @@ export const revokeStreamUserToken = functions.https.onCall(
 
 export const deleteStreamUser = functions.auth.user().onDelete(
   async (user: functions.auth.UserRecord) => {
-    await serverClient.deleteUser(user.uid);
+    try {
+      await serverClient.deleteUser(user.uid);
+    } catch (e) {
+      console.error("Failed to delete Stream user:", String(e));
+    }
   }
 );
